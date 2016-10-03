@@ -1,4 +1,6 @@
-﻿using LINQtoCSV;
+﻿//Author: Kamran Zafar
+//Created on: Oct 03, 2016
+using LINQtoCSV;
 using RiskApp.ViewModel;
 using System;
 using System.Collections;
@@ -103,7 +105,16 @@ namespace RiskApp.Business
                 IEnumerable<UnSettled> unSettledBets =
                     cc.Read<UnSettled>(@"UnSettled.csv", inputFileDescription);
 
-               var bets =
+                var average = unSettledBets
+                    .GroupBy(g => g.Customer, r => r.Stake)
+                   .Select(g => new AverageBet
+                   {
+                       Customer = g.Key,
+                       AverageStake = g.Average()
+                   })
+                   ;
+
+                var bets =
                     from p in unSettledBets
                     orderby p.Customer
                     select new UnSettled
@@ -113,12 +124,9 @@ namespace RiskApp.Business
                         Participant = p.Participant,
                         Stake = p.Stake,
                         ToWin = p.ToWin
+                        //,ListAverageBet = average.ToList()
+                        ,AverageStake = average.Where(x => x.Customer == p.Customer).Select(x => x.AverageStake).FirstOrDefault()
                     };
-
-                //var bets =
-                //    from p in unSsettledBets
-                //    group p by new { p.Customer, p.Event, p.Participant, p.Stake, p.ToWin } into g
-                //    select new UnSettled { Customer = g.Key.Customer, Event = g.Key.Event, Participant = g.Key.Participant, Stake = g.Key.Stake, ToWin = g.Key.ToWin };
 
                 return bets.ToList();
             }
