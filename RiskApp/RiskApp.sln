@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskApp", "RiskApp\RiskApp.csproj", "{5D8D8ACA-57F8-4D88-846B-82990F72E0E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicLayer", "BusinessLogicLayer", "{97689F5E-EF65-4AA1-B033-A40AA8E302C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskApp.Business", "RiskApp.Business\RiskApp.Business.csproj", "{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,15 @@ Global
 		{5D8D8ACA-57F8-4D88-846B-82990F72E0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D8D8ACA-57F8-4D88-846B-82990F72E0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D8D8ACA-57F8-4D88-846B-82990F72E0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2} = {97689F5E-EF65-4AA1-B033-A40AA8E302C8}
 	EndGlobalSection
 EndGlobal

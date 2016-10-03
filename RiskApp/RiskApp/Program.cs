@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RiskApp.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,11 @@ namespace RiskApp
     {
         static void Main(string[] args)
         {
+            Bet obj = new Bet();
+
+            obj.IdentifySettledBet();
+
+            obj.IdentifyUnSettledBet();
         }
     }
 }
