@@ -24,7 +24,14 @@ namespace RiskApp.ViewModel
         [CsvColumn(FieldIndex = 5)]
         public int Win { get; set; }
 
-        public int TotalBets { get; set; }
-        public int WinBets { get; set; }
+        //public int TotalBets { get; set; }
+        //public int WinBets { get; set; }
     }
+
+    //public class Win
+    //{
+    //    public int Customer { get; set; }
+    //    public int TotalBets { get; set; }
+    //    public int WinBets { get; set; }
+    //}
 }

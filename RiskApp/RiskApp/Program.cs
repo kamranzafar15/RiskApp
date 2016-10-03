@@ -17,6 +17,20 @@ namespace RiskApp
 
             List<Settled> settledBets = obj.IdentifySettledBet();
 
+            List<int> unUsualCustomers = new List<int>();
+            var uniqueCustomers = settledBets.Select(x => x.Customer).Distinct();
+            foreach (var uniqueCustomer in uniqueCustomers)
+            {
+                double totalBets = settledBets.Where(x => x.Customer == uniqueCustomer).Count();
+                double totalBetsWin = settledBets.Where(x => x.Customer == uniqueCustomer && x.Win > 0).Count();
+
+                if (totalBetsWin / totalBets > 0.6)
+                {
+                    unUsualCustomers.Add(uniqueCustomer);
+                }
+            }
+
+            settledBets = settledBets.Where(x => unUsualCustomers.Contains(x.Customer)).ToList<Settled>();
             if (settledBets != null)
             {
                 Console.WriteLine("===== Settled bet history for a customer winning at an unusual rate =====");

@@ -35,10 +35,17 @@ namespace RiskApp.Business
                 IEnumerable<Settled> settledBets =
                     cc.Read<Settled>(@"Settled.csv", inputFileDescription);
 
+                //var count = settledBets
+                //    .GroupBy(g => g.Customer, r => r.Stake)
+                //   .Select(g => new Win
+                //   {
+                //       Customer = g.Key,
+                //       TotalBets = g.Count()
+                //   })
+                //   ;
+
                 var settled =
                     from p in settledBets
-                        //group p by new { p.Customer, p.Win } into g
-                        //where 
                     select new Settled { Customer = p.Customer, Event = p.Event, Participant = p.Participant, Stake = p.Stake, Win = p.Win };
 
                 return settled.ToList();
