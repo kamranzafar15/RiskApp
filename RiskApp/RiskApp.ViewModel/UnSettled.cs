@@ -26,5 +26,13 @@ namespace RiskApp.ViewModel
 
         //[CsvColumn(FieldIndex = 6)]
         public double AverageStake { get; set; }
+
+        public List<AverageBet> ListAverageBet = new List<AverageBet>();
+    }
+
+    public class AverageBet
+    {
+        public int Customer { get; set; }
+        public double AverageStake { get; set; }
     }
 }

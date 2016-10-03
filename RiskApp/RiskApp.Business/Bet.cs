@@ -20,7 +20,7 @@ namespace RiskApp.Business
         /// Returns settled bet history
         /// </summary>
         /// <returns>settled bet history</returns>
-        public List<Settled> IdentifySettledBet()
+        public List<Settled> IdentifySettledBet(double rate)
         {
             try
             {
@@ -46,9 +46,11 @@ namespace RiskApp.Business
 
                 var settled =
                     from p in settledBets
-                    select new Settled { Customer = p.Customer, Event = p.Event, Participant = p.Participant, Stake = p.Stake, Win = p.Win };
+                    orderby p.Customer
+                    select new Settled { Customer = p.Customer, Event = p.Event, Participant = p.Participant, Stake = p.Stake, Win = p.Win }
+                    ;
 
-                return settled.ToList();
+                return GetSettledUnusualBet(settled.ToList(), rate);
             }
             catch (Exception ex)
             {
@@ -57,20 +59,73 @@ namespace RiskApp.Business
         }
 
         /// <summary>
+        /// This method will return bets containing customers bet hiostory winning at unusual rate
+        /// </summary>
+        /// <param name="settledBets"></param>
+        /// <param name="rate"></param>
+        /// <returns></returns>
+        public List<Settled> GetSettledUnusualBet(List<Settled> settledBets, double rate)
+        {
+            List<int> unUsualCustomers = new List<int>();
+            var uniqueCustomers = settledBets.Select(x => x.Customer).Distinct();
+            foreach (var uniqueCustomer in uniqueCustomers)
+            {
+                double totalBets = settledBets.Where(x => x.Customer == uniqueCustomer).Count();
+                double totalBetsWin = settledBets.Where(x => x.Customer == uniqueCustomer && x.Win > 0).Count();
+
+                if (totalBetsWin / totalBets > rate)
+                {
+                    unUsualCustomers.Add(uniqueCustomer);
+                }
+            }
+
+            settledBets = settledBets.Where(x => unUsualCustomers.Contains(x.Customer)).ToList<Settled>();
+
+            return settledBets;
+        }
+
+        /// <summary>
         /// Returns Unsettled bet history
         /// </summary>
         /// <returns>Unsettled bet history</returns>
-        public ArrayList IdentifyUnSettledBet()
+        public List<UnSettled> IdentifyUnSettledBet()
         {
             try
             {
+                CsvFileDescription inputFileDescription = new CsvFileDescription
+                {
+                    SeparatorChar = ',',
+                    FirstLineHasColumnNames = true
+                };
 
+                CsvContext cc = new CsvContext();
+
+                IEnumerable<UnSettled> unSettledBets =
+                    cc.Read<UnSettled>(@"UnSettled.csv", inputFileDescription);
+
+               var bets =
+                    from p in unSettledBets
+                    orderby p.Customer
+                    select new UnSettled
+                    {
+                        Customer = p.Customer,
+                        Event = p.Event,
+                        Participant = p.Participant,
+                        Stake = p.Stake,
+                        ToWin = p.ToWin
+                    };
+
+                //var bets =
+                //    from p in unSsettledBets
+                //    group p by new { p.Customer, p.Event, p.Participant, p.Stake, p.ToWin } into g
+                //    select new UnSettled { Customer = g.Key.Customer, Event = g.Key.Event, Participant = g.Key.Participant, Stake = g.Key.Stake, ToWin = g.Key.ToWin };
+
+                return bets.ToList();
             }
             catch (Exception ex)
             {
                 return null;
             }
-            return null;
         }
     }
 }
