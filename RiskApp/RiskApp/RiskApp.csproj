@@ -54,6 +54,10 @@
       <Project>{f2dcee9c-2d8f-4797-96b4-45362a0b01c2}</Project>
       <Name>RiskApp.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RiskApp.ViewModel\RiskApp.ViewModel.csproj">
+      <Project>{083bfcf9-a804-4385-a7ee-55e37ee8fdf3}</Project>
+      <Name>RiskApp.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

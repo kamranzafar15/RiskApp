@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LINQtoCSV;
+using RiskApp.ViewModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +20,33 @@ namespace RiskApp.Business
         /// Returns settled bet history
         /// </summary>
         /// <returns>settled bet history</returns>
-        public ArrayList IdentifySettledBet()
+        public List<Settled> IdentifySettledBet()
         {
             try
             {
+                CsvFileDescription inputFileDescription = new CsvFileDescription
+                {
+                    SeparatorChar = ',',
+                    FirstLineHasColumnNames = true
+                };
 
+                CsvContext cc = new CsvContext();
+
+                IEnumerable<Settled> settledBets =
+                    cc.Read<Settled>(@"Settled.csv", inputFileDescription);
+
+                var settled =
+                    from p in settledBets
+                        //group p by new { p.Customer, p.Win } into g
+                        //where 
+                    select new Settled { Customer = p.Customer, Event = p.Event, Participant = p.Participant, Stake = p.Stake, Win = p.Win };
+
+                return settled.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
-            return null;
         }
 
         /// <summary>
