@@ -9,6 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicLayer", "Busin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskApp.Business", "RiskApp.Business\RiskApp.Business.csproj", "{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccessLayer", "DataAccessLayer", "{C06DF76D-C4B8-4005-9128-0D58A0FB0E8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskApp.ViewModel", "RiskApp.ViewModel\RiskApp.ViewModel.csproj", "{083BFCF9-A804-4385-A7EE-55E37EE8FDF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{1B8BE94C-F9B4-49A0-B0CD-5C342949E002}"
+	ProjectSection(SolutionItems) = preProject
+		Packages\LINQtoCSV.dll = Packages\LINQtoCSV.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +32,16 @@ Global
 		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083BFCF9-A804-4385-A7EE-55E37EE8FDF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083BFCF9-A804-4385-A7EE-55E37EE8FDF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083BFCF9-A804-4385-A7EE-55E37EE8FDF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083BFCF9-A804-4385-A7EE-55E37EE8FDF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F2DCEE9C-2D8F-4797-96B4-45362A0B01C2} = {97689F5E-EF65-4AA1-B033-A40AA8E302C8}
+		{083BFCF9-A804-4385-A7EE-55E37EE8FDF3} = {C06DF76D-C4B8-4005-9128-0D58A0FB0E8D}
 	EndGlobalSection
 EndGlobal

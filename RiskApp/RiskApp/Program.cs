@@ -11,11 +11,14 @@ namespace RiskApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("##### Display Settled and Unsettled bets #####");
             Bet obj = new Bet();
 
             obj.IdentifySettledBet();
 
             obj.IdentifyUnSettledBet();
+
+            Console.ReadLine();
         }
     }
 }
