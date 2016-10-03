@@ -7,4 +7,4 @@ To run and test the application:
 
 Note:
 ----
-Teh bet files i.e. Settled.csv and Unsettled.csv are found in the same above folder.
+The bet files i.e. Settled.csv and Unsettled.csv are found in the same above folder.

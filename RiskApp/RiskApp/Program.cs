@@ -1,4 +1,6 @@
-﻿using RiskApp.Business;
+﻿//Author: Kamran Zafar
+//Created on: Oct 03, 2016
+using RiskApp.Business;
 using RiskApp.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace RiskApp
         {
             Console.WriteLine("##### Display Settled and Unsettled bets #####");
             Bet obj = new Bet();
+
+            //=================== Identify Settled Bets ======================================
             double rate = 0.6;
             List<Settled> settledBets = obj.IdentifySettledBet(rate);
 
@@ -29,8 +33,8 @@ namespace RiskApp
             //        unUsualCustomers.Add(uniqueCustomer);
             //    }
             //}
-
             //settledBets = settledBets.Where(x => unUsualCustomers.Contains(x.Customer)).ToList<Settled>();
+
             if (settledBets != null)
             {
                 Console.WriteLine("===== Settled bet history for a customer winning at an unusual rate =====");
@@ -45,14 +49,34 @@ namespace RiskApp
                 Console.WriteLine("Some error occurred");
             }
 
-            //===============================================================
+            //=================== Identify Unsettled Bets ======================================
             List<UnSettled> unSettledBets = obj.IdentifyUnSettledBet();
             if (unSettledBets != null)
             {
-                Console.WriteLine("Customer - Stake");
+                //Console.WriteLine("Customer - Stake - AverageBet");
+                //foreach (var bet in unSettledBets)
+                //{
+                //    Console.WriteLine(bet.Customer + "        -   " + bet.Stake + " - " + bet.AverageStake);
+                //}
+
+                string riskType;
+                Console.WriteLine("===== Unsettled bets that exhibit high risk =====");
+                Console.WriteLine("Customer -   Event  -   Participant -   Stake   -        ToWin   -     Risk Type");
                 foreach (var bet in unSettledBets)
                 {
-                    Console.WriteLine(bet.Customer + "        -   " + bet.Stake);
+                    if (bet.ToWin >= 1000 || bet.Stake > (bet.AverageStake * 10))
+                    {
+                        riskType = String.Empty;
+                        if (bet.Stake > (bet.AverageStake * 30))
+                        {
+                            riskType = "Highly Unusual";
+                        }
+                        else if (bet.Stake > (bet.AverageStake * 10))
+                        {
+                            riskType = "Unusual";
+                        }
+                        Console.WriteLine(bet.Customer + "        -    " + bet.Event + "    -     " + bet.Participant + "         -      " + bet.Stake + "   -      " + bet.ToWin + "     -   " + riskType);
+                    }
                 }
             }
             else

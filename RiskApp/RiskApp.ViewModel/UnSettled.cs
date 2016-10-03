@@ -1,4 +1,6 @@
-﻿using LINQtoCSV;
+﻿//Author: Kamran Zafar
+//Created on: Oct 03, 2016
+using LINQtoCSV;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +26,9 @@ namespace RiskApp.ViewModel
         [CsvColumn(FieldIndex = 5)]
         public int ToWin { get; set; }
 
-        //[CsvColumn(FieldIndex = 6)]
         public double AverageStake { get; set; }
 
-        public List<AverageBet> ListAverageBet = new List<AverageBet>();
+        //public List<AverageBet> ListAverageBet = new List<AverageBet>();
     }
 
     public class AverageBet
